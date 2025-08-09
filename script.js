@@ -433,7 +433,7 @@ function enviarWhatsApp() {
   const dataFormatada = formatarDataBrasileira(dataISO);
 
   const mensagem = `
-Olá! Gostaria de fazer uma reserva de estacionamento:
+Olá! Gostaria de fazer uma reserva para o estacionamento:
 
 🧍 Nome: ${nome}
 🚘 Placa: ${placa}
