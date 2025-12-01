@@ -251,6 +251,14 @@ body {
     animation: bounce 2s infinite;
 }
 
+/* Reservation Notice Section */
+.reserva-aviso-section {
+    background: #f0f9ff;
+    padding: 2rem 0;
+    min-height: auto;
+}
+
+
 /* Section Animations */
 section {
     min-height: 70vh;    /* 70% da altura da viewport */
@@ -703,6 +711,42 @@ section.visible {
     color: #1e40af;
     line-height: 1.6;
 }
+
+/* Reservation Notice Card */
+.reserva-notice {
+    background: #e0f2fe;
+    padding: 1.5rem;
+    border-radius: 10px;
+    border-left: 4px solid #3b82f6;
+    margin-bottom: 2rem;
+}
+
+.reserva-notice h4 {
+    color: #1e40af;
+    margin-bottom: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.reserva-notice ul {
+    list-style: none;
+    padding: 0;
+}
+
+.reserva-notice li {
+    padding: 0.5rem 0;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    color: #1e40af;
+}
+
+.reserva-notice li i {
+    color: #3b82f6;
+    width: 20px;
+}
+
 
 /* Location Section */
 .location-section {
