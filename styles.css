@@ -712,39 +712,95 @@ section.visible {
     line-height: 1.6;
 }
 
-/* Reservation Notice Card */
-.reserva-notice {
-    background: #e0f2fe;
-    padding: 1.5rem;
-    border-radius: 10px;
-    border-left: 4px solid #3b82f6;
-    margin-bottom: 2rem;
+/* Reservation Notice Card (New Design) */
+.reserva-procedimento {
+    background: linear-gradient(135deg, #ffffff, #f0f9ff);
+    border-radius: 15px;
+    padding: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    border: 1px solid #e2e8f0;
+    max-width: 800px;
+    margin: 2rem auto; /* Centraliza o card */
 }
 
-.reserva-notice h4 {
-    color: #1e40af;
-    margin-bottom: 1rem;
+.reserva-titulo {
+    text-align: center;
+    font-size: 1.8rem;
+    font-weight: bold;
+    color: #1f2937;
+    margin-bottom: 2rem;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: center;
+    gap: 0.8rem;
 }
 
-.reserva-notice ul {
-    list-style: none;
-    padding: 0;
+.reserva-titulo i {
+    color: #3b82f6;
 }
 
-.reserva-notice li {
-    padding: 0.5rem 0;
+.passos-reserva {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.passo {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.5rem;
+}
+
+.passo-numero {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: #3b82f6;
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(59, 130, 246, 0.3);
+}
+
+.passo-conteudo p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.passo-conteudo p:first-child {
+    font-weight: bold;
+    color: #374151;
+    font-size: 1.1rem;
+}
+
+.passo-conteudo p:last-child {
+    color: #6b7280;
+    font-size: 1rem;
+}
+
+.reserva-aviso-importante {
+    margin-top: 2rem;
+    padding: 1.5rem;
+    background: #fffbe6;
+    border-left: 5px solid #facc15;
+    border-radius: 8px;
+}
+
+.reserva-aviso-importante p {
+    margin: 0;
+    color: #a16207;
+    font-size: 1.05rem;
     display: flex;
     align-items: center;
     gap: 1rem;
-    color: #1e40af;
 }
 
-.reserva-notice li i {
-    color: #3b82f6;
-    width: 20px;
+.reserva-aviso-importante i {
+    font-size: 1.5rem;
 }
 
 
