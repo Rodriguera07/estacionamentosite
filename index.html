@@ -4,450 +4,450 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="google-site-verification" content="jAkWV3-wt8hLl1ru7Fl8KLepM9j_1yTFTJzUXW7jrTI" />
-    <title> Erivan Estacionamento, Seguro e Confiável</title>
-    <link rel="shortcut icon" href="./assets/Erivan estacionamento_2 (1).png" type="./assets/Erivan estacionamento_2 (1).png">
+    <meta name="description" content="Erivan Estacionamento - Estacionamento seguro e confiável pé na areia em Bertioga. Próximo ao Sesc, com banheiros, duchas e seguro incluso.">
+    <title>Erivan Estacionamento | Seguro e Confiável em Bertioga</title>
+    <link rel="shortcut icon" href="./assets/Erivan estacionamento_2 (1).png" type="image/png">
     <link rel="stylesheet" href="styles.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
     <!-- Header -->
-    <header id="home" class="hero">
-        <div class="hero-bg"></div>
+    <header class="header">
         <nav class="navbar">
             <div class="nav-container">
-                <div class="logo">
-                    <i class="fas fa-car"></i>
-                    Erivan Estacionamento
-                </div>
+                <a href="#home" class="logo">
+                    <span class="logo-icon">
+                        <i class="fas fa-car"></i>
+                    </span>
+                    <span class="logo-text">Erivan</span>
+                </a>
                 <ul class="nav-menu">
-                    <li><a href="#home" class="nav-link active">Home</a></li>
+                    <li><a href="#home" class="nav-link">Início</a></li>
                     <li><a href="#sobre" class="nav-link">Sobre</a></li>
                     <li><a href="#servicos" class="nav-link">Serviços</a></li>
                     <li><a href="#precos" class="nav-link">Preços</a></li>
                     <li><a href="#contato" class="nav-link">Contato</a></li>
                 </ul>
-                <div class="hamburger">
+                <a href="#reservar" class="btn-nav">Reservar</a>
+                <button class="hamburger" aria-label="Menu">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
             </div>
         </nav>
-        
-        <div class="hero-content">
-            <h1 class="hero-title">
-                Erivan Estacionamento
-                <span class="hero-subtitle">Seguro e Confiável</span>
-            </h1>
-            <p class="hero-description">
-                Reserve sua vaga com facilidade e tenha a tranquilidade de um estacionamento Pé na areia!
-            </p>
-             <!-- Botão do header -->
-             <button class="btn-whatsapp" onclick="toggleChatBox()">
-                <i class="fas fa-calendar-check"></i>
-                Reservar Agora
-            </button>
-        </div>
-        
-        <div class="scroll-indicator">
-            <i class="fas fa-chevron-down"></i>
-        </div>
     </header>
 
-    <!-- Reservation Notice Section -->
-    <section class="reserva-aviso-section">
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="hero-bg">
+            <img src="./assets/frentealto.jpeg" alt="Erivan Estacionamento vista frontal">
+        </div>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <span class="hero-badge">
+                <i class="fas fa-shield-alt"></i>
+                Pé na Areia • Desde 2013
+            </span>
+            <h1 class="hero-title">
+                Estacione com <br>
+                <span class="text-accent">Segurança</span> em Bertioga
+            </h1>
+            <p class="hero-description">
+                Estacionamento seguro ao lado do Sesc Bertioga com banheiros, duchas e seguro completo para seu veículo.
+            </p>
+            <div class="hero-buttons">
+                <a href="https://wa.me/5513991526498?text=Ol%C3%A1!%20Gostaria%20de%20fazer%20uma%20reserva." class="btn btn-primary">
+                    <i class="fab fa-whatsapp"></i>
+                    Reservar Agora
+                </a>
+                <a href="#sobre" class="btn btn-secondary">
+                    Saiba Mais
+                    <i class="fas fa-arrow-right"></i>
+                </a>
+            </div>
+        </div>
+        <div class="hero-scroll">
+            <span>Role para descobrir</span>
+            <i class="fas fa-chevron-down"></i>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats-section">
         <div class="container">
-            <div class="reserva-procedimento">
-                <h3 class="reserva-titulo"><i class="fas fa-clipboard-list"></i> Como Fazer Sua Reserva</h3>
-                <div class="passos-reserva">
-                    <div class="passo">
-                        <div class="passo-numero">1</div>
-                        <div class="passo-conteudo">
-                            <p><strong>Inicie o contato</strong></p>
-                            <p>Use um dos botões "Reservar" no site para falar conosco pelo WhatsApp.</p>
-                        </div>
-                    </div>
-                    <div class="passo">
-                        <div class="passo-numero">2</div>
-                        <div class="passo-conteudo">
-                            <p><strong>Forneça os dados</strong></p>
-                            <p>Informe seu nome, a placa e modelo do veículo, e a data desejada.</p>
-                        </div>
-                    </div>
-                    <div class="passo">
-                        <div class="passo-numero">3</div>
-                        <div class="passo-conteudo">
-                            <p><strong>Confirme com PIX</strong></p>
-                            <p>A reserva é garantida com o pagamento de 100% do valor via PIX.</p>
-                        </div>
-                    </div>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <span class="stat-number">12+</span>
+                    <span class="stat-label">Anos de Experiência</span>
                 </div>
-                <div class="reserva-aviso-importante">
-                    <p><i class="fas fa-exclamation-triangle"></i> <strong>Atenção:</strong> Devido à alta procura, faça sua reserva com antecedência para garantir sua vaga!</p>
+                <div class="stat-divider"></div>
+                <div class="stat-card">
+                    <span class="stat-number">10.000+</span>
+                    <span class="stat-label">Clientes Satisfeitos</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-card">
+                    <span class="stat-number">50</span>
+                    <span class="stat-label">Vagas Disponíveis</span>
+                </div>
+                <div class="stat-divider"></div>
+                <div class="stat-card">
+                    <span class="stat-number">24/7</span>
+                    <span class="stat-label">Monitoramento</span>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- About Section -->
-    <section id="sobre" class="about-section slide-left">
+    <!-- How to Reserve Section -->
+    <section id="reservar" class="reserve-section">
         <div class="container">
-            <div class="about-grid">
-                <div class="about-content">
-                    <h2 class="section-title">Sobre Nós</h2>
-                    <p class="about-text">
-                        Bem-vindos ao Erivan Estacionamento, sua porta de entrada para o paraíso em Bertioga desde 2013! Estamos aqui para garantir que sua experiência na praia seja verdadeiramente inesquecível e conveniente. Deixe-nos cuidar de todos os detalhes enquanto você desfruta do melhor que a natureza tem a oferecer.
-                    <br><br>
-                    Localizado pé na areia ao lado do Sesc Bertioga, oferecemos um ambiente tranquilo e familiar, com espaço para até 50 carros. Além disso, fornecemos sanitários e duchas para o seu conforto e conveniência. Agora, com seguro contra roubo, furto, incêndio e raio, você pode desfrutar de sua visita à praia com total tranquilidade e segurança.
-                    <br><br>
-                    Venha nos visitar e descubra por que somos a primeira escolha dos amantes da praia em Bertioga. Faça da sua próxima visita à praia uma experiência livre de preocupações e repleta de comodidades. Estamos ansiosos para recebê-lo no Erivan Estacionamento!
-                    </p>
-                    <p class="about-text">
-                        Contamos com tecnologia de ponta, equipe treinada e instalações modernas 
-                        para garantir a melhor experiência em estacionamento da cidade.
-                    </p>
-                    <div class="stats">
-                        <div class="stat-item">
-                            <div class="stat-number">12+</div>
-                            <div class="stat-label">Anos de Experiência</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">10000+</div>
-                            <div class="stat-label">Clientes Satisfeitos</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">24/7</div>
-                            <div class="stat-label">Monitoramento</div>
-                        </div>
+            <div class="section-header">
+                <span class="section-badge">Como Reservar</span>
+                <h2 class="section-title">Faça sua reserva em <span class="text-accent">3 passos</span></h2>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Inicie o Contato</h3>
+                        <p>Clique em "Reservar" para falar conosco pelo WhatsApp de forma rápida e prática.</p>
                     </div>
                 </div>
-                <div class="about-image">
-                    <img src="./assets/img-frente-alto.jpeg" alt="Estacionamento moderno e seguro">
+                <div class="step-connector">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Forneça os Dados</h3>
+                        <p>Informe seu nome, placa e modelo do veículo, e a data desejada para a reserva.</p>
+                    </div>
+                </div>
+                <div class="step-connector">
+                    <i class="fas fa-arrow-right"></i>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Confirme com PIX</h3>
+                        <p>A reserva é garantida com o pagamento de 100% do valor via PIX.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="reserve-notice">
+                <i class="fas fa-exclamation-circle"></i>
+                <p><strong>Atenção:</strong> Devido à alta procura, faça sua reserva com antecedência para garantir sua vaga!</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="sobre" class="about-section">
+        <div class="container">
+            <div class="about-grid">
+                <div class="about-images">
+                    <div class="about-image-main">
+                        <img src="./assets/img-frente-alto.jpeg" alt="Vista do Erivan Estacionamento">
+                    </div>
+                    <div class="about-image-secondary">
+                        <img src="./assets/visaogeral.jpeg" alt="Vista geral do bairro Rio da Praia">
+                    </div>
+                </div>
+                <div class="about-content">
+                    <span class="section-badge">Sobre Nós</span>
+                    <h2 class="section-title-left">Sua porta de entrada para o <span class="text-accent">paraíso</span> em Bertioga</h2>
+                    <p class="about-text">
+                        Bem-vindos ao Erivan Estacionamento! Desde 2013, garantimos que sua experiência na praia seja verdadeiramente inesquecível e conveniente.
+                    </p>
+                    <p class="about-text">
+                        Localizado pé na areia ao lado do Sesc Bertioga, oferecemos um ambiente tranquilo e familiar, com espaço para até 50 carros. Fornecemos sanitários, duchas e seguro completo contra roubo, furto, incêndio e raio.
+                    </p>
+                    <div class="about-features">
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Localização privilegiada</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Seguro completo incluso</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Banheiros e duchas</span>
+                        </div>
+                        <div class="about-feature">
+                            <i class="fas fa-check-circle"></i>
+                            <span>Ambiente familiar</span>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Services Section -->
-    <section id="servicos" class="services-section slide-right">
+    <section id="servicos" class="services-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Nossos Serviços</h2>
-                <p class="section-description">
-                    Oferecemos uma gama completa de serviços para garantir sua segurança e comodidade
-                </p>
+                <span class="section-badge">Serviços</span>
+                <h2 class="section-title">Tudo que você precisa em <span class="text-accent">um só lugar</span></h2>
+                <p class="section-description">Oferecemos uma gama completa de serviços para garantir sua segurança e comodidade</p>
             </div>
-            
             <div class="services-grid">
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-shield-alt"></i>
                     </div>
-                    <h3 class="service-title">Estacionamento Assegurado</h3>
-                    <p class="service-description">
-                        Sua vaga garantida com total segurança e proteção contra roubo, furto, incêndio.
-                    </p>
+                    <h3>Estacionamento Assegurado</h3>
+                    <p>Proteção completa contra roubo, furto, incêndio e raio para total tranquilidade.</p>
                 </div>
-                
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-eye"></i>
+                        <i class="fas fa-video"></i>
                     </div>
-                    <h3 class="service-title">Monitoramento 24h</h3>
-                    <p class="service-description">
-                        Vigilância constante com câmeras de alta resolução e equipe especializada.
-                    </p>
+                    <h3>Monitoramento 24h</h3>
+                    <p>Vigilância constante com câmeras de alta resolução e equipe especializada.</p>
                 </div>
-                
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-id-card"></i>
+                        <i class="fas fa-id-badge"></i>
                     </div>
-                    <h3 class="service-title">Controle de Acesso com Pulseira</h3>
-                    <p class="service-description">
-                        Sistema moderno com pulseiras de identificação para máxima segurança.
-                    </p>
+                    <h3>Controle por Pulseira</h3>
+                    <p>Sistema moderno com pulseiras impermeáveis para máxima segurança.</p>
                 </div>
-                
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-bath"></i>
+                        <i class="fas fa-shower"></i>
                     </div>
-                    <h3 class="service-title">Banheiros e Duchas</h3>
-                    <p class="service-description">
-                        Instalações completas e sempre limpas para seu conforto.
-                    </p>
+                    <h3>Banheiros e Duchas</h3>
+                    <p>Instalações completas e sempre limpas para seu conforto.</p>
                 </div>
-                
                 <div class="service-card">
                     <div class="service-icon">
                         <i class="fas fa-wheelchair"></i>
                     </div>
-                    <h3 class="service-title">Acessibilidade PCD</h3>
-                    <p class="service-description">
-                    sanitário e duchas adaptado para pessoas com deficiência, garantindo conforto e segurança para todos.
-                    </p>
+                    <h3>Acessibilidade PCD</h3>
+                    <p>Sanitário e duchas adaptados para pessoas com deficiência.</p>
                 </div>
-
-                <!-- Novo card adicionado -->
                 <div class="service-card">
                     <div class="service-icon">
-                        <i class="fas fa-parking"></i>
+                        <i class="fas fa-motorcycle"></i>
                     </div>
-                    <h3 class="service-title">Vagas para Carros e Motos</h3>
-                    <p class="service-description">
-                        Amplo espaço para carros e motos, garantindo praticidade e segurança para todos os veículos.
-                    </p>
+                    <h3>Vagas para Motos</h3>
+                    <p>Espaço dedicado para motos com a mesma segurança e comodidade.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Service Detail Section -->
-    <section class="service-detail-section slide-left">
-        <div class="container">
-            <div class="service-detail-grid">
-                <div class="service-detail-image">
-                    <img src="./assets/img-frente-alto.jpeg" alt="Sistema de segurança 24h">
-                </div>
-                <div class="service-detail-content">
-                    <h2 class="section-title">Segurança e Conforto!</h2>
-                    <p class="service-detail-text">
-                       Para ter total acesso ao estacionamento, é necessário o uso de pulseiras impermeáveis que garantem a segurança e controle de acesso.
-                       Nossos clientes têm acesso livre a banheiros e duchas, garantindo conforto durante todo o período de estadia.
-                    </p>
-                    <div class="features-list">
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Ambiente monitorado 24h</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Controle de acesso por pulseira impermeável</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Seguro proteção contra roubo, furto, granizo e incêndio.</span>
-                        </div>
-                        <div class="feature-item">
-                            <i class="fas fa-check-circle"></i>
-                            <span>Livre ao acesso para banheiro e duchas</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Photo Slider Section -->
-    <section class="gallery-section slide-right">
+    <!-- Gallery Section -->
+    <section class="gallery-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Nossas Instalações</h2>
-                <p class="section-description">Conheça nosso espaço moderno e seguro</p>
+                <span class="section-badge">Galeria</span>
+                <h2 class="section-title">Conheça nossas <span class="text-accent">instalações</span></h2>
             </div>
-            
-            <div class="slider-container">
-                <div class="slider">
-                    <div class="slide">
+            <div class="gallery-slider">
+                <div class="gallery-track">
+                    <div class="gallery-slide active">
                         <img src="./assets/img-frente-alto.jpeg" alt="Entrada principal do estacionamento">
-                        <div class="slide-caption">Entrada Principal</div>
+                        <div class="gallery-caption">Entrada Principal</div>
                     </div>
-                    <div class="slide">
-                        <img src="./assets/estacionamento4.jpg" alt="Área de estacionamento">
-                        <div class="slide-caption">Área de Banheiro e Duchas</div>
+                    <div class="gallery-slide">
+                        <img src="./assets/estacionamento4.jpg" alt="Área de banheiro e duchas">
+                        <div class="gallery-caption">Banheiros e Duchas</div>
                     </div>
-                    <div class="slide">
-                        <img src="./assets/estacionamento1.jpg" alt="Sistema de segurança">
-                        <div class="slide-caption">Espaços de Vagas</div>
+                    <div class="gallery-slide">
+                        <img src="./assets/estacionamento1.jpg" alt="Espaços de vagas">
+                        <div class="gallery-caption">Espaços de Vagas</div>
                     </div>
-                    <div class="slide">
-                        <img src="./assets/estacionamento5.jpg" alt="Área para pessoas com deficiência">
-                        <div class="slide-caption">Cabine de cobrança</div>
+                    <div class="gallery-slide">
+                        <img src="./assets/estacionamento5.jpg" alt="Cabine de cobrança">
+                        <div class="gallery-caption">Cabine de Cobrança</div>
                     </div>
-                    <div class="slide">
-                        <img src="./assets/frentealto.jpeg" alt="Área para pessoas com deficiência">
-                        <div class="slide-caption">Frente do estacionamento</div>
+                    <div class="gallery-slide">
+                        <img src="./assets/frentealto.jpeg" alt="Frente do estacionamento">
+                        <div class="gallery-caption">Frente do Estacionamento</div>
                     </div>
-                    <div class="slide">
-                        <img src="./assets/visaogeral.jpeg" alt="Área para pessoas com deficiência">
-                        <div class="slide-caption">Visão do bairro Rio da Praia</div>
+                    <div class="gallery-slide">
+                        <img src="./assets/visaogeral.jpeg" alt="Visão do bairro Rio da Praia">
+                        <div class="gallery-caption">Visão do Bairro</div>
                     </div>
                 </div>
-                
-                <button class="slider-btn prev-btn" onclick="changeSlide(-1)">
+                <button class="gallery-btn gallery-prev" aria-label="Anterior">
                     <i class="fas fa-chevron-left"></i>
                 </button>
-                <button class="slider-btn next-btn" onclick="changeSlide(1)">
+                <button class="gallery-btn gallery-next" aria-label="Próximo">
                     <i class="fas fa-chevron-right"></i>
                 </button>
-                
-                <div class="slider-dots">
-                    <span class="dot active" onclick="currentSlide(1)"></span>
-                    <span class="dot" onclick="currentSlide(2)"></span>
-                    <span class="dot" onclick="currentSlide(3)"></span>
-                    <span class="dot" onclick="currentSlide(4)"></span>
-                </div>
+                <div class="gallery-dots"></div>
             </div>
         </div>
     </section>
 
-    <!-- Prices and Notices Section -->
-    <section id="precos" class="prices-section slide-left">
+    <!-- Prices Section -->
+    <section id="precos" class="prices-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Preços e Informações</h2>
-                <p class="section-description">Verifique Horário e valores do Período</p>
+                <span class="section-badge">Preços</span>
+                <h2 class="section-title">Valores <span class="text-accent">transparentes</span></h2>
             </div>
-            
             <div class="prices-grid">
-                <div class="prices-table-container">
-                    <h3 class="subsection-title">
-                        <i class="fas fa-money-bill-wave"></i>
-                        Tabela de Preços
-                    </h3>
-                    <table class="prices-table">
-                        <thead>
-                            <tr>
-                                <th>08h-18:00</th>
-                                <th><i class="fas fa-car"></i> Carro</th>
-                                <th><i class="fas fa-motorcycle"></i> Moto</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Período</td>
-                                <td class="price">R$ 70,00</td>
-                                <td class="price">R$ 40,00</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
-                
-                <div class="notices-container">
-                    <h3 class="subsection-title">
-                        <i class="fas fa-info-circle"></i>
-                        Avisos e Instruções
-                    </h3>
-                    <div class="notices-card">
-                        <ul class="notices-list">
-                            <li><i class="fas fa-clock"></i> Horário de funcionamento: 8h as 18h</li>
-                            <li><i class="fas fa-hourglass-half"></i> Não trabalhamos por Hora, somente o período!</li>
-                            <li><i class="fas fa-exclamation-triangle"></i> Não nos responsabilizamos por objetos deixados no veículo</li>
-                            <li><i class="fas fa-exclamation-triangle"></i> O acesso dos clientes é permitido somente mediante uso da pulseira entregue no estacionamento, de Uso Obrigatório</li>
-                            <li><i class="fas fa-ban"></i> Proibido saida de veiculo durante periodo estacionado, exceto em caso de emergencia.</li>
-                        </ul>
-                        
-                        <div class="reserva-notice">
-                            <h4><i class="fas fa-exclamation-circle"></i> Como Efetuar sua Reserva</h4>
-                            <ul>
-                                <li><i class="fas fa-check"></i>A reserva só é confirmada mediante pagamento de 100% do valor via PIX.</li>
-                                <li><i class="fas fa-car-side"></i>Forneça a Placa e Modelo do veículo.</li>
-                                <li><i class="fas fa-calendar-alt"></i>Informe a Data da reserva.</li>
-                                <li><i class="fas fa-user"></i>Informe o Nome do titular.</li>
-                            </ul>
-                        </div>
-                        
-                        <div class="important-notice">
-                            <h4><i class="fas fa-star"></i> Importante:</h4>
-                            <p>
-                                Para garantir sua vaga, recomendamos fazer a reserva com antecedência. 
-                                Em caso de dúvidas, entre em contato conosco através do WhatsApp.
-                            </p>
-                        </div>
+                <div class="price-card featured">
+                    <div class="price-header">
+                        <i class="fas fa-car"></i>
+                        <h3>Carro</h3>
                     </div>
+                    <div class="price-value">
+                        <span class="currency">R$</span>
+                        <span class="amount">70</span>
+                        <span class="period">/período</span>
+                    </div>
+                    <ul class="price-features">
+                        <li><i class="fas fa-check"></i> Horário: 08h às 18h</li>
+                        <li><i class="fas fa-check"></i> Seguro incluso</li>
+                        <li><i class="fas fa-check"></i> Banheiros e duchas</li>
+                        <li><i class="fas fa-check"></i> Pulseira de acesso</li>
+                    </ul>
+                    <a href="https://wa.me/5513991526498?text=Ol%C3%A1!%20Gostaria%20de%20reservar%20uma%20vaga%20para%20carro." class="btn btn-primary btn-full">
+                        <i class="fab fa-whatsapp"></i>
+                        Reservar Carro
+                    </a>
+                </div>
+                <div class="price-card">
+                    <div class="price-header">
+                        <i class="fas fa-motorcycle"></i>
+                        <h3>Moto</h3>
+                    </div>
+                    <div class="price-value">
+                        <span class="currency">R$</span>
+                        <span class="amount">40</span>
+                        <span class="period">/período</span>
+                    </div>
+                    <ul class="price-features">
+                        <li><i class="fas fa-check"></i> Horário: 08h às 18h</li>
+                        <li><i class="fas fa-check"></i> Seguro incluso</li>
+                        <li><i class="fas fa-check"></i> Banheiros e duchas</li>
+                        <li><i class="fas fa-check"></i> Pulseira de acesso</li>
+                    </ul>
+                    <a href="https://wa.me/5513991526498?text=Ol%C3%A1!%20Gostaria%20de%20reservar%20uma%20vaga%20para%20moto." class="btn btn-outline btn-full">
+                        <i class="fab fa-whatsapp"></i>
+                        Reservar Moto
+                    </a>
+                </div>
+            </div>
+            <div class="notices-grid">
+                <div class="notice-card">
+                    <h4><i class="fas fa-info-circle"></i> Informações Importantes</h4>
+                    <ul>
+                        <li><i class="fas fa-clock"></i> Funcionamento: 08h às 18h</li>
+                        <li><i class="fas fa-hourglass-half"></i> Trabalhamos apenas por período, não por hora</li>
+                        <li><i class="fas fa-exclamation-triangle"></i> Não nos responsabilizamos por objetos deixados no veículo</li>
+                        <li><i class="fas fa-id-badge"></i> Uso da pulseira é obrigatório para acesso</li>
+                        <li><i class="fas fa-ban"></i> Saída de veículo durante o período não é permitida, exceto emergências</li>
+                    </ul>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Location Section -->
-    <section class="location-section slide-right">
+    <section class="location-section">
         <div class="container">
             <div class="section-header">
-                <h2 class="section-title">Nossa Localização</h2>
-                <p class="section-description">Encontre-nos facilmente</p>
+                <span class="section-badge">Localização</span>
+                <h2 class="section-title">Encontre-nos <span class="text-accent">facilmente</span></h2>
             </div>
-            
             <div class="location-grid">
-                <div class="map-container">
-                    <div class="map-placeholder">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <p>Mapa Interativo</p>
-                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3649.634572086607!2d-46.1130315!3d-23.831590199999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cdfb82e2ec43a3%3A0x3cf8a02aaea14542!2sErivan%20Estacionamento!5e0!3m2!1spt-PT!2sbr!4v1754629143618!5m2!1spt-PT!2sbr" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-                    </div>
+                <div class="location-map">
+                    <iframe 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3649.634572086607!2d-46.1130315!3d-23.831590199999997!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94cdfb82e2ec43a3%3A0x3cf8a02aaea14542!2sErivan%20Estacionamento!5e0!3m2!1spt-PT!2sbr!4v1754629143618!5m2!1spt-PT!2sbr" 
+                        width="100%" 
+                        height="100%" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy" 
+                        referrerpolicy="no-referrer-when-downgrade"
+                        title="Localização do Erivan Estacionamento">
+                    </iframe>
                 </div>
-                
                 <div class="location-info">
-                    <div class="info-item">
-                        <i class="fas fa-map-marker-alt"></i>
-                        <div>
-                            <h4>Endereço</h4>
-                            <p>Av. Tome de Souza, 3489- Rio da Praia.<br>Bertioga - SP, 11256-005</p>
+                    <div class="location-card">
+                        <div class="location-item">
+                            <div class="location-icon">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </div>
+                            <div>
+                                <h4>Endereço</h4>
+                                <p>Av. Tome de Souza, 3489<br>Rio da Praia - Bertioga - SP<br>CEP: 11256-005</p>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <div class="location-icon">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <div>
+                                <h4>Horário</h4>
+                                <p>Segunda a Domingo<br>08h às 18h</p>
+                            </div>
+                        </div>
+                        <div class="location-item">
+                            <div class="location-icon">
+                                <i class="fas fa-landmark"></i>
+                            </div>
+                            <div>
+                                <h4>Referência</h4>
+                                <p>Ao lado do Sesc Bertioga<br>Pé na areia</p>
+                            </div>
                         </div>
                     </div>
-                    
-                    <div class="info-item">
-                        <i class="fas fa-clock"></i>
-                        <div>
-                            <h4>Horário de Funcionamento</h4>
-                            <p>08h as 18h<br></p>
-                        </div>
-                    </div>
-                    
-                    <div class="info-item">
-                        <i class="fas fa-car"></i>
-                        <div>
-                            <h4>Capacidade</h4>
-                            <p> aproximadamente 55 carros<br>15 vagas para motos</p>
-                        </div>
-                    </div>
+                    <a href="https://maps.google.com/maps?q=Erivan+Estacionamento" target="_blank" rel="noopener" class="btn btn-primary btn-full">
+                        <i class="fas fa-directions"></i>
+                        Abrir no Google Maps
+                    </a>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Contact Section -->
-    <section id="contato" class="contact-section slide-left">
+    <section id="contato" class="contact-section">
         <div class="container">
-            <div class="section-header">
-                <h2 class="section-title">Entre em Contato</h2>
-                <p class="section-description">Estamos aqui para ajudar você</p>
+            <div class="section-header light">
+                <span class="section-badge light">Contato</span>
+                <h2 class="section-title">Fale <span class="text-accent">conosco</span></h2>
+                <p class="section-description light">Estamos prontos para atender você</p>
             </div>
-            
             <div class="contact-grid">
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <h3>Telefone</h3>
-                    <p>(13) 99727-8944</p>
-                    <button class="btn-contact" onclick="window.location.href='tel:13997278944'">
-                        <i class="fas-fa-phone-alt"></i>
-                        Ligar Agora
-                    </button>
-                </div>
-                
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <h3>E-mail</h3>
-                    <p>estacionamento3489@gmail.com</p>
-                    <!-- Botão de enviar e-mail na seção de contato -->
-                    <button class="btn-contact" onclick="window.location.href='mailto:seuemail@dominio.com?subject=Reserva de Estacionamento&body=Olá! Gostaria de reservar uma vaga.'">
-                        <i class=></i>
-                        Enviar E-mail
-                    </button>
-                </div>
-                
-                <div class="contact-item">
-                    <i class="fab-fa-whatsapp"></i>
-                    <h3>WhatsApp</h3>
-                    <p>(13) 99727-8944</p>
-                    <p>Atendimento em horario comercial</p>
-                    <!-- Botões de reserva pelo WhatsApp -->
-                    <button class="btn-whatsapp" onclick="toggleChatBox()">
+                <a href="https://wa.me/5513991526498?text=Ol%C3%A1!%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es." class="contact-card">
+                    <div class="contact-icon">
                         <i class="fab fa-whatsapp"></i>
-                        Reservar pelo WhatsApp
-                    </button>
-                </div>
+                    </div>
+                    <h3>WhatsApp</h3>
+                    <p>(13) 99152-6498</p>
+                    <span class="contact-action">Enviar mensagem <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="tel:+5513991526498" class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-phone-alt"></i>
+                    </div>
+                    <h3>Telefone</h3>
+                    <p>(13) 99152-6498</p>
+                    <span class="contact-action">Ligar agora <i class="fas fa-arrow-right"></i></span>
+                </a>
+                <a href="mailto:erivanestacionamento@gmail.com" class="contact-card">
+                    <div class="contact-icon">
+                        <i class="fas fa-envelope"></i>
+                    </div>
+                    <h3>E-mail</h3>
+                    <p>erivanestacionamento@gmail.com</p>
+                    <span class="contact-action">Enviar e-mail <i class="fas fa-arrow-right"></i></span>
+                </a>
             </div>
         </div>
     </section>
@@ -456,91 +456,64 @@
     <footer class="footer">
         <div class="container">
             <div class="footer-grid">
-                <div class="footer-section">
-                    <h3>
+                <div class="footer-brand">
+                    <a href="#home" class="footer-logo">
                         <i class="fas fa-car"></i>
-                        Erivan<br>Estacionamento
-                    </h3>
-                    <p>Seu estacionamento seguro e confiável na Praia.</p>
+                        <span>Erivan Estacionamento</span>
+                    </a>
+                    <p>Sua porta de entrada para o paraíso em Bertioga. Estacionamento seguro e confiável desde 2013.</p>
                     <div class="social-links">
-                        <a href="https://www.tiktok.com/@erivan.estacionam?_t=ZM-8yiOG3CBA4G&_r=1"target="_blank" class="social-link"><i class="fab fa-tiktok"></i></a>
-                        <a href="https://www.instagram.com/estacionamento3489/" target="_blank"  class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="https://www.instagram.com/erivanestacionamento" target="_blank" rel="noopener" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="https://www.facebook.com/erivanestacionamento" target="_blank" rel="noopener" aria-label="Facebook">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="https://wa.me/5513991526498" target="_blank" rel="noopener" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
                     </div>
                 </div>
-                
-                <div class="footer-section">
+                <div class="footer-links">
                     <h4>Links Rápidos</h4>
                     <ul>
-                        <li><a href="#home"><i class="fas fa-home"></i> Home</a></li>
-                        <li><a href="#sobre"><i class="fas fa-info-circle"></i> Sobre</a></li>
-                        <li><a href="#servicos"><i class="fas fa-cogs"></i> Serviços</a></li>
-                        <li><a href="#precos"><i class="fas fa-money-bill"></i> Preços</a></li>
+                        <li><a href="#home">Início</a></li>
+                        <li><a href="#sobre">Sobre</a></li>
+                        <li><a href="#servicos">Serviços</a></li>
+                        <li><a href="#precos">Preços</a></li>
+                        <li><a href="#contato">Contato</a></li>
                     </ul>
                 </div>
-                
-                <div class="footer-section">
-                    <h4>Serviços</h4>
-                    <ul>
-                        <li><i class="fas fa-shield-alt"></i> Estacionamento 08h as 18h</li>
-                        <li><i class="fas fa-eye"></i> Monitoramento</li>
-                        <li><i class="fas fa-id-card"></i> Controle de Acesso</li>
-                        <li><i class="fas fa-wheelchair"></i> Acessibilidade</li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
+                <div class="footer-contact">
                     <h4>Contato</h4>
-                    <div class="contact-info">
-                        <p><i class="fas fa-map-marker-alt"></i> Av. Tomé de Souza, 3489</p>
-                        <p><i class="fas fa-city"></i> Bertioga - São Paulo/SP</p>
-                        <p><i class="fas fa-phone"></i> (13) 99727-8944</p>
-                        <p><i class="fas fa-envelope"></i> estacionamento3489@gmail.com</p>
-                    </div>
-                     <button class="btn-whatsapp" onclick="enviarWhatsApp()">
-                        <i class="fab fa-whatsapp"></i>
-                        Reservar pelo WhatsApp
-                    </button>
+                    <ul>
+                        <li>
+                            <i class="fas fa-map-marker-alt"></i>
+                            Av. Tome de Souza, 3489 - Bertioga
+                        </li>
+                        <li>
+                            <i class="fas fa-phone-alt"></i>
+                            (13) 99152-6498
+                        </li>
+                        <li>
+                            <i class="fas fa-envelope"></i>
+                            erivanestacionamento@gmail.com
+                        </li>
+                    </ul>
                 </div>
             </div>
-            
             <div class="footer-bottom">
                 <p>&copy; 2025 Erivan Estacionamento. Todos os direitos reservados.</p>
-                <p>Desenvolvido com <i class="fas fa-heart"></i> para sua segurança</p>
+                <p>Feito com <i class="fas fa-heart"></i> em Bertioga</p>
             </div>
         </div>
     </footer>
-    
-    <!-- Loading Overlay -->
-    <div id="loadingOverlay" class="loading-overlay">
-        <div class="loading-spinner">
-            <i class="fas fa-car"></i>
-            <p>Carregando...</p>
-        </div>
-    </div>
-    <span id="status"></span>
+
+    <!-- WhatsApp Float Button -->
+    <a href="https://wa.me/5513991526498?text=Ol%C3%A1!%20Gostaria%20de%20mais%20informa%C3%A7%C3%B5es." class="whatsapp-float" aria-label="WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
     <script src="script.js"></script>
-
-  <!-- Botão flutuante com ícone SVG -->
-  <div class="chat-toggle" onclick="toggleChatBox()">
-    <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="white" viewBox="0 0 24 24">
-      <path d="M20 2H4C2.897 2 2 2.897 2 4v14c0 1.103.897 2 2 2h4v4l5.333-4H20c1.103 0 2-.897 2-2V4c0-1.103-.897-2-2-2z"/>
-    </svg>
-  </div>
-
-  <!-- Caixa de reserva -->
-  <div class="chat-box" id="chatBox">
-    <h2>Reserva de Estacionamento</h2>
-    <input type="text" id="nome" placeholder="Seu nome" required>
-    <input type="text" id="placa" placeholder="Placa do veículo" required>
-    <select id="modelo">
-      <option value="">Selecione o modelo</option>
-      <option value="Carro">Carro</option>
-      <option value="Moto">Moto</option>
-    </select>
-    <input type="date" id="data" required>
-    <button onclick="enviarWhatsApp()">Reservar via WhatsApp</button>
-  </div>
-
-  <script src="script.js"></script>
 </body>
 </html>
