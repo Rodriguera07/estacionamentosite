@@ -1,449 +1,636 @@
-// Global variables
-let currentSlideIndex = 0;
-const slides = document.querySelectorAll('.slide');
-const dots = document.querySelectorAll('.dot');
-let slideInterval;
-let isLoading = true;
+// ========================================
+// ERIVAN ESTACIONAMENTO - PREMIUM JAVASCRIPT
+// ========================================
 
-// DOM Content Loaded
 document.addEventListener('DOMContentLoaded', function() {
-    // Hide loading overlay after page loads
-    setTimeout(() => {
-        const loadingOverlay = document.getElementById('loadingOverlay');
-        loadingOverlay.classList.add('hidden');
-        isLoading = false;
-    }, 1500);
-
-    initializeSlider();
-    initializeScrollAnimations();
     initializeNavigation();
     initializeMobileMenu();
-    setMinDate();
+    initializeGallery();
+    initializeScrollAnimations();
+    initializeBackToTop();
+    initializeActiveNavLink();
+    initializeChatWidget();
 });
 
-// Set minimum date to today
-function setMinDate() {
-    const dateInput = document.getElementById('date');
-    const today = new Date().toISOString().split('T')[0];
-    dateInput.min = today;
-}
-
-// Slider functionality
-function initializeSlider() {
-    if (slides.length > 0) {
-        showSlide(currentSlideIndex);
-        startAutoSlide();
-    }
-}
-
-function showSlide(index) {
-    // Hide all slides
-    slides.forEach(slide => slide.classList.remove('active'));
-    dots.forEach(dot => dot.classList.remove('active'));
+// ========================================
+// NAVIGATION
+// ========================================
+function initializeNavigation() {
+    const header = document.getElementById('header');
     
-    // Show current slide
-    if (slides[index]) {
-        slides[index].classList.add('active');
-        if (dots[index]) {
-            dots[index].classList.add('active');
+    // Header scroll effect
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+        const currentScroll = window.scrollY;
+        
+        if (currentScroll > 50) {
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
         }
-    }
-}
-
-function changeSlide(direction) {
-    currentSlideIndex += direction;
+        
+        lastScroll = currentScroll;
+    });
     
-    if (currentSlideIndex >= slides.length) {
-        currentSlideIndex = 0;
-    } else if (currentSlideIndex < 0) {
-        currentSlideIndex = slides.length - 1;
-    }
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault();
+            const targetId = this.getAttribute('href');
+            
+            if (targetId === '#') return;
+            
+            const targetElement = document.querySelector(targetId);
+            if (targetElement) {
+                const headerHeight = 80;
+                const targetPosition = targetElement.offsetTop - headerHeight;
+                
+                window.scrollTo({
+                    top: targetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Close mobile menu if open
+                closeMobileMenu();
+            }
+        });
+    });
+}
+
+// ========================================
+// MOBILE MENU
+// ========================================
+function initializeMobileMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
     
-    showSlide(currentSlideIndex);
-    resetAutoSlide();
+    if (!hamburger || !navMenu) return;
+    
+    hamburger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        hamburger.classList.toggle('active');
+        navMenu.classList.toggle('active');
+        document.body.style.overflow = navMenu.classList.contains('active') ? 'hidden' : '';
+    });
+    
+    // Close when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            closeMobileMenu();
+        }
+    });
+    
+    // Close on escape key
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            closeMobileMenu();
+        }
+    });
+    
+    // Close on resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            closeMobileMenu();
+        }
+    });
 }
 
-function currentSlide(index) {
-    currentSlideIndex = index - 1;
-    showSlide(currentSlideIndex);
-    resetAutoSlide();
-}
-
-function startAutoSlide() {
-    if (slides.length > 1) {
-        slideInterval = setInterval(() => {
-            changeSlide(1);
-        }, 5000);
+function closeMobileMenu() {
+    const hamburger = document.getElementById('hamburger');
+    const navMenu = document.getElementById('navMenu');
+    
+    if (hamburger && navMenu) {
+        hamburger.classList.remove('active');
+        navMenu.classList.remove('active');
+        document.body.style.overflow = '';
     }
 }
 
-function resetAutoSlide() {
-    clearInterval(slideInterval);
-    startAutoSlide();
-}
-
-// Scroll animations
-function initializeScrollAnimations() {
-    const sections = document.querySelectorAll('section');
+// ========================================
+// ACTIVE NAV LINK
+// ========================================
+function initializeActiveNavLink() {
+    const sections = document.querySelectorAll('section[id]');
+    const navLinks = document.querySelectorAll('.nav-link');
     
     const observerOptions = {
-        threshold: 0.15,
-        rootMargin: '0px 0px -50px 0px'
+        root: null,
+        rootMargin: '-20% 0px -70% 0px',
+        threshold: 0
     };
     
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.classList.add('visible');
+                const id = entry.target.getAttribute('id');
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if (link.getAttribute('href') === `#${id}`) {
+                        link.classList.add('active');
+                    }
+                });
             }
         });
     }, observerOptions);
     
-    sections.forEach(section => {
-        observer.observe(section);
+    sections.forEach(section => observer.observe(section));
+}
+
+// ========================================
+// GALLERY
+// ========================================
+let currentSlide = 0;
+let slideInterval;
+
+function initializeGallery() {
+    const slides = document.querySelectorAll('.gallery-slide');
+    const prevBtn = document.querySelector('.gallery-btn.prev');
+    const nextBtn = document.querySelector('.gallery-btn.next');
+    const dotsContainer = document.querySelector('.gallery-dots');
+    const thumbs = document.querySelectorAll('.thumb');
+    
+    if (slides.length === 0) return;
+    
+    // Create dots
+    slides.forEach((_, index) => {
+        const dot = document.createElement('span');
+        dot.className = `dot ${index === 0 ? 'active' : ''}`;
+        dot.addEventListener('click', () => goToSlide(index));
+        dotsContainer.appendChild(dot);
+    });
+    
+    // Navigation buttons
+    prevBtn?.addEventListener('click', () => changeSlide(-1));
+    nextBtn?.addEventListener('click', () => changeSlide(1));
+    
+    // Thumbnail clicks
+    thumbs.forEach((thumb, index) => {
+        thumb.addEventListener('click', () => goToSlide(index));
+    });
+    
+    // Keyboard navigation
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') changeSlide(-1);
+        if (e.key === 'ArrowRight') changeSlide(1);
+    });
+    
+    // Touch support
+    const galleryMain = document.querySelector('.gallery-main');
+    let touchStartX = 0;
+    let touchEndX = 0;
+    
+    galleryMain?.addEventListener('touchstart', (e) => {
+        touchStartX = e.changedTouches[0].screenX;
+    }, { passive: true });
+    
+    galleryMain?.addEventListener('touchend', (e) => {
+        touchEndX = e.changedTouches[0].screenX;
+        handleSwipe();
+    }, { passive: true });
+    
+    function handleSwipe() {
+        const swipeThreshold = 50;
+        const diff = touchStartX - touchEndX;
+        
+        if (Math.abs(diff) > swipeThreshold) {
+            if (diff > 0) {
+                changeSlide(1);
+            } else {
+                changeSlide(-1);
+            }
+        }
+    }
+    
+    // Auto slide
+    startAutoSlide();
+    
+    // Pause on hover
+    galleryMain?.addEventListener('mouseenter', stopAutoSlide);
+    galleryMain?.addEventListener('mouseleave', startAutoSlide);
+}
+
+function showSlide(index) {
+    const slides = document.querySelectorAll('.gallery-slide');
+    const dots = document.querySelectorAll('.gallery-dots .dot');
+    const thumbs = document.querySelectorAll('.thumb');
+    
+    if (index >= slides.length) index = 0;
+    if (index < 0) index = slides.length - 1;
+    
+    slides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+    });
+    
+    dots.forEach((dot, i) => {
+        dot.classList.toggle('active', i === index);
+    });
+    
+    thumbs.forEach((thumb, i) => {
+        thumb.classList.toggle('active', i === index);
+    });
+    
+    currentSlide = index;
+}
+
+function changeSlide(direction) {
+    showSlide(currentSlide + direction);
+    resetAutoSlide();
+}
+
+function goToSlide(index) {
+    showSlide(index);
+    resetAutoSlide();
+}
+
+function startAutoSlide() {
+    stopAutoSlide();
+    slideInterval = setInterval(() => changeSlide(1), 5000);
+}
+
+function stopAutoSlide() {
+    if (slideInterval) {
+        clearInterval(slideInterval);
+    }
+}
+
+function resetAutoSlide() {
+    stopAutoSlide();
+    startAutoSlide();
+}
+
+// ========================================
+// SCROLL ANIMATIONS
+// ========================================
+function initializeScrollAnimations() {
+    const animatedElements = document.querySelectorAll(
+        '.service-card, .step-card, .price-card, .contact-card, .feature-item, .about-content, .about-images, .info-card'
+    );
+    
+    const observerOptions = {
+        threshold: 0.1,
+        rootMargin: '0px 0px -50px 0px'
+    };
+    
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                setTimeout(() => {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }, index * 80);
+                observer.unobserve(entry.target);
+            }
+        });
+    }, observerOptions);
+    
+    animatedElements.forEach(el => {
+        el.style.opacity = '0';
+        el.style.transform = 'translateY(30px)';
+        el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+        observer.observe(el);
     });
 }
 
-// Navigation functionality
-function initializeNavigation() {
-    const navLinks = document.querySelectorAll('.nav-link');
-    const navbar = document.querySelector('.navbar');
+// ========================================
+// BACK TO TOP
+// ========================================
+function initializeBackToTop() {
+    const backToTop = document.getElementById('backToTop');
     
-    // Smooth scrolling
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                const offsetTop = targetSection.offsetTop - 80;
-                window.scrollTo({
-                    top: offsetTop,
-                    behavior: 'smooth'
-                });
-            }
-            
-            // Close mobile menu if open
-            const navMenu = document.querySelector('.nav-menu');
-            const hamburger = document.querySelector('.hamburger');
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
+    if (!backToTop) return;
+    
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+            backToTop.classList.add('visible');
+        } else {
+            backToTop.classList.remove('visible');
+        }
+    });
+    
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
         });
     });
-    
-    // Navbar scroll effect
-    window.addEventListener('scroll', () => {
-        if (window.scrollY > 100) {
-            navbar.classList.add('scrolled');
-        } else {
-            navbar.classList.remove('scrolled');
-        }
-        
-        // Update active nav link
-        updateActiveNavLink();
-    });
 }
 
-function updateActiveNavLink() {
-    const sections = document.querySelectorAll('section');
-    const navLinks = document.querySelectorAll('.nav-link');
+// ========================================
+// CHAT WIDGET FOR RESERVATIONS
+// ========================================
+function initializeChatWidget() {
+    const chatWidget = document.getElementById('chatWidget');
+    const chatToggle = document.getElementById('chatToggle');
+    const chatClose = document.getElementById('chatClose');
+    const chatInput = document.getElementById('chatInput');
+    const chatSend = document.getElementById('chatSend');
+    const chatMessages = document.getElementById('chatMessages');
+    const chatBody = document.getElementById('chatBody');
     
-    let currentSection = 'home';
+    if (!chatWidget || !chatToggle) return;
     
-    sections.forEach(section => {
-        const sectionTop = section.offsetTop - 150;
-        const sectionHeight = section.offsetHeight;
-        
-        if (window.scrollY >= sectionTop && window.scrollY < sectionTop + sectionHeight) {
-            currentSection = section.getAttribute('id');
-        }
-    });
-    
-    // Handle hero section
-    if (window.scrollY < 100) {
-        currentSection = 'home';
-    }
-    
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${currentSection}`) {
-            link.classList.add('active');
-        }
-    });
-}
-
-// Mobile menu
-function initializeMobileMenu() {
-    const hamburger = document.querySelector('.hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    
-    hamburger.addEventListener('click', (e) => {
-        e.stopPropagation();
-        navMenu.classList.toggle('active');
-        hamburger.classList.toggle('active');
-    });
-    
-    // Close menu when clicking outside
-    document.addEventListener('click', (e) => {
-        if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
-        }
-    });
-    
-    // Close menu on window resize
-    window.addEventListener('resize', () => {
-        if (window.innerWidth > 768) {
-            navMenu.classList.remove('active');
-            hamburger.classList.remove('active');
-        }
-    });
-}
-
-// Utility functions
-function formatDate(dateString) {
-    const date = new Date(dateString + 'T00:00:00');
-    const options = { 
-        weekday: 'long', 
-        year: 'numeric', 
-        month: 'long', 
-        day: 'numeric',
-        timeZone: 'America/Sao_Paulo'
+    // State for the reservation form
+    let reservationData = {
+        nome: '',
+        veiculo: '',
+        placa: '',
+        data: '',
+        horario: '',
+        observacoes: ''
     };
-    return date.toLocaleDateString('pt-BR', options);
-}
-
-function showNotification(message, type = 'info') {
-    // Remove existing notifications
-    const existingNotifications = document.querySelectorAll('.notification');
-    existingNotifications.forEach(notification => notification.remove());
     
-    const notification = document.createElement('div');
-    notification.className = `notification ${type}`;
+    let currentStep = 0;
     
-    const icon = type === 'success' ? 'fas fa-check-circle' : 
-                 type === 'error' ? 'fas fa-exclamation-circle' : 
-                 'fas fa-info-circle';
-    
-    notification.innerHTML = `
-        <i class="${icon}"></i>
-        <span>${message}</span>
-    `;
-    
-    const bgColor = type === 'success' ? '#10b981' : 
-                    type === 'error' ? '#ef4444' : 
-                    '#3b82f6';
-    
-    notification.style.cssText = `
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: ${bgColor};
-        color: white;
-        padding: 1rem 1.5rem;
-        border-radius: 10px;
-        box-shadow: 0 8px 25px rgba(0,0,0,0.15);
-        z-index: 3000;
-        animation: slideInRight 0.3s ease;
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        font-weight: 500;
-        max-width: 300px;
-    `;
-    
-    document.body.appendChild(notification);
-    
-    setTimeout(() => {
-        notification.style.animation = 'slideOutRight 0.3s ease';
-        setTimeout(() => {
-            if (notification.parentNode) {
-                notification.parentNode.removeChild(notification);
-            }
-        }, 300);
-    }, 4000);
-}
-
-// Close modal when clicking outside
-document.addEventListener('click', (e) => {
-    const chatModal = document.getElementById('chatModal');
-    const chatContent = document.querySelector('.chat-content');
-    
-    if (chatModal && chatModal.classList.contains('active') && 
-        chatContent && !chatContent.contains(e.target)) {
-        closeChat();
-    }
-});
-
-// Keyboard navigation
-document.addEventListener('keydown', (e) => {
-    const chatModal = document.getElementById('chatModal');
-    
-    if (e.key === 'Escape') {
-        if (chatModal && chatModal.classList.contains('active')) {
-            closeChat();
+    const steps = [
+        {
+            field: 'nome',
+            question: 'Ola! Bem-vindo ao Erivan Estacionamento! Vou te ajudar a fazer sua reserva. Qual e o seu <strong>nome completo</strong>?',
+            validation: (value) => value.length >= 3,
+            errorMessage: 'Por favor, digite seu nome completo (minimo 3 caracteres).'
+        },
+        {
+            field: 'veiculo',
+            question: 'Otimo, {nome}! Agora me diz qual e o <strong>modelo e cor do seu veiculo</strong>? (Ex: Civic Preto, Onix Branco)',
+            validation: (value) => value.length >= 3,
+            errorMessage: 'Por favor, informe o modelo e cor do veiculo.'
+        },
+        {
+            field: 'placa',
+            question: 'Perfeito! Qual e a <strong>placa do veiculo</strong>?',
+            validation: (value) => value.length >= 7,
+            errorMessage: 'Por favor, informe uma placa valida.'
+        },
+        {
+            field: 'data',
+            question: 'Excelente! Para qual <strong>data</strong> voce gostaria de reservar? (Ex: 25/12/2024 ou amanha)',
+            validation: (value) => value.length >= 4,
+            errorMessage: 'Por favor, informe a data desejada.'
+        },
+        {
+            field: 'observacoes',
+            question: 'Alguma <strong>observacao ou pedido especial</strong>? (Se nao tiver, digite "nao")',
+            validation: () => true,
+            errorMessage: ''
         }
-    }
-    
-    // Slider keyboard navigation
-    if (!chatModal || !chatModal.classList.contains('active')) {
-        if (e.key === 'ArrowLeft') {
-            changeSlide(-1);
-        } else if (e.key === 'ArrowRight') {
-            changeSlide(1);
-        }
-    }
-});
-
-// Add CSS animations for notifications
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes slideInRight {
-        from {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-    
-    @keyframes slideOutRight {
-        from {
-            transform: translateX(0);
-            opacity: 1;
-        }
-        to {
-            transform: translateX(100%);
-            opacity: 0;
-        }
-    }
-    
-    .field-error {
-    .field-error {
-        animation: fadeIn 0.3s ease;
-    }
-    
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-`;
-document.head.appendChild(style);
-
-// Performance optimization
-window.addEventListener('load', () => {
-    // Preload images for better performance
-    const imageUrls = [
-        '/placeholder.svg?height=400&width=600&text=Estacionamento+Moderno',
-        '/placeholder.svg?height=400&width=500&text=Segurança+24h',
-        '/placeholder.svg?height=400&width=800&text=Entrada+Principal',
-        '/placeholder.svg?height=400&width=800&text=Área+de+Estacionamento'
     ];
     
-    imageUrls.forEach(url => {
-        const img = new Image();
-        img.src = url;
-    });
-    
-    // Initialize lazy loading for images
-    if ('IntersectionObserver' in window) {
-        const imageObserver = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-                    img.src = img.dataset.src;
-                    img.classList.remove('lazy');
-                    imageObserver.unobserve(img);
-                }
-            });
-        });
+    // Toggle chat
+    chatToggle.addEventListener('click', () => {
+        chatWidget.classList.add('active');
+        chatToggle.classList.add('hidden');
+        const notification = chatToggle.querySelector('.chat-notification');
+        if (notification) notification.style.display = 'none';
         
-        document.querySelectorAll('img[data-src]').forEach(img => {
-            imageObserver.observe(img);
-        });
-    }
-});
-
-// Smooth scroll polyfill for older browsers
-if (!('scrollBehavior' in document.documentElement.style)) {
-    const smoothScrollPolyfill = document.createElement('script');
-    smoothScrollPolyfill.src = 'https://cdn.jsdelivr.net/gh/iamdustan/smoothscroll@master/src/smoothscroll.js';
-    document.head.appendChild(smoothScrollPolyfill);
-}
-
-// Service Worker registration for PWA capabilities
-if ('serviceWorker' in navigator) {
-    window.addEventListener('load', () => {
-        navigator.serviceWorker.register('/sw.js')
-            .then(registration => {
-                console.log('SW registered: ', registration);
-            })
-            .catch(registrationError => {
-                console.log('SW registration failed: ', registrationError);
-            });
+        setTimeout(() => {
+            chatInput.focus();
+        }, 300);
     });
-}
-
-// Analytics tracking (placeholder)
-function trackEvent(eventName, eventData = {}) {
-    // Google Analytics or other tracking service integration
-    if (typeof gtag !== 'undefined') {
-        gtag('event', eventName, eventData);
+    
+    chatClose.addEventListener('click', () => {
+        chatWidget.classList.remove('active');
+        chatToggle.classList.remove('hidden');
+    });
+    
+    // Handle send
+    const handleSend = () => {
+        const value = chatInput.value.trim();
+        if (!value) return;
+        
+        // Add user message
+        addMessage(value, 'user');
+        chatInput.value = '';
+        
+        // Process the response
+        processUserInput(value);
+    };
+    
+    chatSend.addEventListener('click', handleSend);
+    chatInput.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            handleSend();
+        }
+    });
+    
+    function addMessage(text, type, isHtml = false) {
+        const messageDiv = document.createElement('div');
+        messageDiv.className = `chat-message ${type}`;
+        
+        const contentDiv = document.createElement('div');
+        contentDiv.className = 'message-content';
+        
+        const p = document.createElement('p');
+        if (isHtml) {
+            p.innerHTML = text;
+        } else {
+            p.textContent = text;
+        }
+        
+        contentDiv.appendChild(p);
+        messageDiv.appendChild(contentDiv);
+        chatMessages.appendChild(messageDiv);
+        
+        // Scroll to bottom
+        chatBody.scrollTop = chatBody.scrollHeight;
     }
     
-    console.log('Event tracked:', eventName, eventData);
+    function processUserInput(value) {
+        const step = steps[currentStep];
+        
+        // Validate input
+        if (!step.validation(value)) {
+            setTimeout(() => {
+                addMessage(step.errorMessage, 'bot', true);
+            }, 500);
+            return;
+        }
+        
+        // Store the value
+        reservationData[step.field] = value;
+        currentStep++;
+        
+        // Check if we have more steps
+        if (currentStep < steps.length) {
+            setTimeout(() => {
+                let question = steps[currentStep].question;
+                // Replace placeholders
+                question = question.replace('{nome}', reservationData.nome.split(' ')[0]);
+                addMessage(question, 'bot', true);
+            }, 700);
+        } else {
+            // All done, show summary
+            setTimeout(() => {
+                showReservationSummary();
+            }, 700);
+        }
+    }
+    
+    function showReservationSummary() {
+        const obs = reservationData.observacoes.toLowerCase() === 'nao' || reservationData.observacoes.toLowerCase() === 'não' 
+            ? 'Nenhuma' 
+            : reservationData.observacoes;
+        
+        const summaryHtml = `
+            Perfeito! Aqui esta o resumo da sua reserva:
+            </p>
+            <div class="reservation-summary">
+                <h5><i class="fas fa-clipboard-check"></i> Resumo da Reserva</h5>
+                <div class="summary-item">
+                    <span class="summary-label">Nome:</span>
+                    <span class="summary-value">${reservationData.nome}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Veiculo:</span>
+                    <span class="summary-value">${reservationData.veiculo}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Placa:</span>
+                    <span class="summary-value">${reservationData.placa.toUpperCase()}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Data:</span>
+                    <span class="summary-value">${reservationData.data}</span>
+                </div>
+                <div class="summary-item">
+                    <span class="summary-label">Observacoes:</span>
+                    <span class="summary-value">${obs}</span>
+                </div>
+                <a href="${generateWhatsAppLink()}" target="_blank" class="chat-whatsapp-btn">
+                    <i class="fab fa-whatsapp"></i>
+                    Enviar pelo WhatsApp
+                </a>
+            </div>
+            <p style="margin-top: 0.75rem; font-size: 0.8125rem; color: var(--color-gray-500);">
+                Clique no botao acima para enviar sua reserva pelo WhatsApp!
+        `;
+        
+        addMessage(summaryHtml, 'bot', true);
+        
+        // Disable input after completion
+        chatInput.placeholder = 'Reserva concluida! Use o botao do WhatsApp acima.';
+        chatInput.disabled = true;
+        chatSend.disabled = true;
+        chatSend.style.opacity = '0.5';
+        
+        // Add restart option after a delay
+        setTimeout(() => {
+            addMessage('Deseja fazer outra reserva? <button onclick="restartChat()" style="background: var(--color-primary); color: white; border: none; padding: 0.5rem 1rem; border-radius: 0.5rem; cursor: pointer; margin-top: 0.5rem; font-family: inherit;">Nova Reserva</button>', 'bot', true);
+        }, 1500);
+    }
+    
+    function generateWhatsAppLink() {
+        const obs = reservationData.observacoes.toLowerCase() === 'nao' || reservationData.observacoes.toLowerCase() === 'não' 
+            ? 'Nenhuma' 
+            : reservationData.observacoes;
+        
+        const message = `Ola! Gostaria de fazer uma reserva:
+
+*Nome:* ${reservationData.nome}
+*Veiculo:* ${reservationData.veiculo}
+*Placa:* ${reservationData.placa.toUpperCase()}
+*Data:* ${reservationData.data}
+*Observacoes:* ${obs}
+
+Aguardo confirmacao. Obrigado!`;
+
+        return `https://wa.me/5513997278944?text=${encodeURIComponent(message)}`;
+    }
+    
+    // Make restart function global
+    window.restartChat = function() {
+        reservationData = {
+            nome: '',
+            veiculo: '',
+            placa: '',
+            data: '',
+            horario: '',
+            observacoes: ''
+        };
+        currentStep = 0;
+        
+        // Clear messages
+        chatMessages.innerHTML = '';
+        
+        // Re-enable input
+        chatInput.disabled = false;
+        chatInput.placeholder = 'Digite sua resposta...';
+        chatSend.disabled = false;
+        chatSend.style.opacity = '1';
+        
+        // Add initial message
+        addMessage(steps[0].question, 'bot', true);
+        chatInput.focus();
+    };
 }
 
-function toggleChatBox() {
-  const chatBox = document.getElementById('chatBox');
-  chatBox.classList.toggle('show');
+// ========================================
+// UTILITY FUNCTIONS
+// ========================================
 
-  if (chatBox.classList.contains('show')) {
-    document.getElementById('nome').value = localStorage.getItem('nome') || '';
-    document.getElementById('placa').value = localStorage.getItem('placa') || '';
-    document.getElementById('modelo').value = localStorage.getItem('modelo') || '';
-    document.getElementById('data').value = localStorage.getItem('data') || '';
-  }
+// Debounce function
+function debounce(func, wait) {
+    let timeout;
+    return function executedFunction(...args) {
+        const later = () => {
+            clearTimeout(timeout);
+            func(...args);
+        };
+        clearTimeout(timeout);
+        timeout = setTimeout(later, wait);
+    };
 }
 
-function formatarDataBrasileira(dataISO) {
-  const [ano, mes, dia] = dataISO.split("-");
-  return `${dia}/${mes}/${ano}`;
+// Throttle function
+function throttle(func, limit) {
+    let inThrottle;
+    return function(...args) {
+        if (!inThrottle) {
+            func.apply(this, args);
+            inThrottle = true;
+            setTimeout(() => inThrottle = false, limit);
+        }
+    };
 }
 
-function enviarWhatsApp() {
-  const nome = document.getElementById('nome').value.trim();
-  const placa = document.getElementById('placa').value.trim();
-  const modelo = document.getElementById('modelo').value;
-  const dataISO = document.getElementById('data').value;
+// Check if element is in viewport
+function isInViewport(element) {
+    const rect = element.getBoundingClientRect();
+    return (
+        rect.top >= 0 &&
+        rect.left >= 0 &&
+        rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
+        rect.right <= (window.innerWidth || document.documentElement.clientWidth)
+    );
+}
 
-  if (!nome || !placa || !modelo || !dataISO) {
-    alert("Por favor, preencha todos os campos.");
-    return;
-  }
+// ========================================
+// PERFORMANCE OPTIMIZATIONS
+// ========================================
 
-  localStorage.setItem('nome', nome);
-  localStorage.setItem('placa', placa);
-  localStorage.setItem('modelo', modelo);
-  localStorage.setItem('data', dataISO);
+// Lazy load images
+if ('IntersectionObserver' in window) {
+    const lazyImages = document.querySelectorAll('img[data-src]');
+    
+    const imageObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const img = entry.target;
+                img.src = img.dataset.src;
+                img.removeAttribute('data-src');
+                observer.unobserve(img);
+            }
+        });
+    }, {
+        rootMargin: '50px 0px'
+    });
+    
+    lazyImages.forEach(img => imageObserver.observe(img));
+}
 
-  const dataFormatada = formatarDataBrasileira(dataISO);
+// Reduce motion for users who prefer it
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  const mensagem = `
-Olá! Gostaria de fazer uma reserva para o estacionamento:
-
-🧍 Nome: ${nome}
-🚘 Placa: ${placa}
-🚗 Modelo: ${modelo}
-📅 Data: ${dataFormatada}
-  `.trim();
-
-  const numeroWhatsApp = "5513997278944"; // Substitua pelo seu número
-  const url = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}`;
-
-  window.open(url, '_blank');
-  document.getElementById('chatBox').classList.remove('show');
+if (prefersReducedMotion.matches) {
+    document.documentElement.style.setProperty('--transition-fast', '0ms');
+    document.documentElement.style.setProperty('--transition-base', '0ms');
+    document.documentElement.style.setProperty('--transition-slow', '0ms');
 }
