@@ -1,0 +1,9 @@
+{
+  "name": "erivan-estacionamento",
+  "version": "1.0.0",
+  "description": "Site do Erivan Estacionamento - Bertioga",
+  "scripts": {
+    "dev": "npx serve -l 3000",
+    "start": "npx serve -l 3000"
+  }
+}
