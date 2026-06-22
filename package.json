@@ -2,8 +2,26 @@
   "name": "erivan-estacionamento",
   "version": "1.0.0",
   "description": "Site do Erivan Estacionamento - Bertioga",
+  "main": "server.js",
   "scripts": {
-    "dev": "npx serve -l 3000",
-    "start": "npx serve -l 3000"
-  }
+    "dev": "node server.js",
+    "start": "node server.js",
+    "serve": "npx serve -l 3000"
+  },
+  "keywords": [
+    "estacionamento",
+    "bertioga",
+    "pé na areia"
+  ],
+  "author": "Erivan Estacionamento",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "helmet": "^7.1.0",
+    "cors": "^2.8.5",
+    "express-rate-limit": "^7.1.5",
+    "express-mongo-sanitize": "^2.2.0",
+    "hpp": "^0.2.3"
+  },
+  "devDependencies": {}
 }
